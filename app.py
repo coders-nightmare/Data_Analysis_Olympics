@@ -71,5 +71,27 @@ if user_menu=='Overall Analysis':
     plt.xticks(rotation='vertical')
     st.pyplot(fig)
 
+    st.title("Events Held Over The Years")
+    events_over_time=helper.events_played_over_time(df)
+    fig=px.line(events_over_time,x="Year",y="count")
+    st.plotly_chart(fig)
+    fig,ax=plt.subplots()
+    ax=sns.barplot(data=events_over_time,x='Year',y='count')
+    plt.xticks(rotation='vertical')
+    st.pyplot(fig)
 
-    
+    st.title("Athletes Played Over The Years")
+    athletes_over_time=helper.athletes_played_over_time(df)
+    fig=px.line(athletes_over_time,x="Year",y="count")
+    st.plotly_chart(fig)
+    fig,ax=plt.subplots()
+    ax=sns.barplot(data=athletes_over_time,x='Year',y='count')
+    plt.xticks(rotation='vertical')
+    st.pyplot(fig)
+
+    st.title("No. of Events Over Time(Every Sport)")
+    x=df.drop_duplicates(['Year','Sport','Event'])
+    pivot_table_events=x.pivot_table(index='Sport',columns='Year',values='Event',aggfunc='count').fillna(0)
+    fig,ax=plt.subplots(figsize=(20,20))
+    ax=sns.heatmap(pivot_table_events,annot=True)
+    st.pyplot(fig)

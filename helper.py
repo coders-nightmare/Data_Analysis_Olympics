@@ -61,3 +61,11 @@ def country_year_list(df):
 def participating_nations_over_time(df):
     nations_over_time=df.drop_duplicates(['Year','region'])['Year'].value_counts().reset_index().sort_values('Year')
     return nations_over_time
+
+def events_played_over_time(df):
+    events_over_time=df.drop_duplicates(['Year','Event'])['Year'].value_counts().reset_index().sort_values('Year')
+    return events_over_time
+def athletes_played_over_time(df):
+    athletes_over_time=df.drop_duplicates(['Year','Name'])['Year'].value_counts().reset_index().sort_values('Year')
+    return athletes_over_time
+
