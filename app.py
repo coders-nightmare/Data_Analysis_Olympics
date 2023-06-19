@@ -95,3 +95,13 @@ if user_menu=='Overall Analysis':
     fig,ax=plt.subplots(figsize=(20,20))
     ax=sns.heatmap(pivot_table_events,annot=True)
     st.pyplot(fig)
+
+
+    st.title("Most Successful Athletes")
+    sport_list=df['Sport'].unique().tolist()
+    sport_list.sort()
+    sport_list.insert(0,'Overall')
+
+    selected_sport=st.selectbox('Select a sport',sport_list)
+    x=helper.most_successful(df,selected_sport)
+    st.table(x)
